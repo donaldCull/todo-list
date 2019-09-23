@@ -1,0 +1,63 @@
+@import "../../abstracts/variable";
+
+.todo-app {
+  display: flex;
+  flex-direction: column;
+  h1 {
+    font-size: 3em;
+  }
+  .todo-list {
+    color: #000000;
+    width: 400px;
+
+    .todo-item {
+      display: flex;
+      margin-bottom: 2em;
+      padding: 0.6em;
+      flex-direction: column;
+      background-color: $todo_background_colour;
+      border-radius: 5px;
+      box-shadow: $box_shadow;
+
+      &.add-item {
+        form {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+      .item-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 0.6em;
+        padding: 5px;
+        border-bottom: 1px solid $border_colour;
+
+        &.add-expanded {
+
+        }
+
+        &.add-unexpanded {
+          flex-direction: column;
+        }
+
+        .item-id {
+          align-items: flex-start;
+        }
+        .item-priority {}
+        .item-complete {
+          align-items: flex-end;
+        }
+      }
+
+      .item-body {
+        .item-description {}
+      }
+
+      &:hover {
+        box-shadow: $hover_box_shadow;
+        cursor: pointer;
+      }
+    }
+  }
+}

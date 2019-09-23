@@ -1,0 +1,7 @@
+export const TODO_LIST = {
+    GET: "TODO_LIST_GET",
+    ADD: "TODO_LIST_ADD",
+    DELETE: "TODO_LIST_DELETE",
+    FOUND: "TODO_LIST_FOUND",
+    FAIL: "TODO_LIST_FAIL",
+};

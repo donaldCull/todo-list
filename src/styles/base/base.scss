@@ -1,0 +1,22 @@
+@import "../abstracts/variable";
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #ffffff;
+  font-family: $font_default;
+  background-color: rgb(25, 118, 210);
+}
+
+input, select, button {
+  margin-bottom: 0.6em;
+  padding: 0.6em;
+}
+
+
+h1 {
+  text-align: center;
+}
