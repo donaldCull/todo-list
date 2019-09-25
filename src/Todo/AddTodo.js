@@ -18,7 +18,7 @@ class AddTodo extends Component {
     addTodo(e) {
         e.preventDefault();
         this.props.addTodo(this.state.description, this.state.priority);
-        this.setState({clicked: false, description: "", priority: ""})
+        this.setState({clicked: false, description: "", priority: "low"})
     }
 
     toggleAddTodo() {
@@ -35,11 +35,11 @@ class AddTodo extends Component {
             <div className="todo-item add-item">
                 <div className={this.state.clicked ? "item-header add-expanded" : "item-header add-unexpanded"}>
                     <button onClick={this.toggleAddTodo}>
-                        <span>➕ Add todo</span>
+                        <span role="img" aria-label="add">➕ Add todo</span>
                     </button>
                     {this.state.clicked &&
                     <button onClick={this.toggleAddTodo}>
-                        <span>❌ Cancel</span>
+                        <span role="img" aria-label="cancel">❌ Cancel</span>
                     </button>
                     }
                 </div>

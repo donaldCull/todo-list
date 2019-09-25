@@ -1,34 +1,37 @@
-import { TODO_LIST } from "../../actions/constants";
-import {TODO_PRIORITY} from "../../Todo/TodoConstants";
+import {TODO_LIST} from "../../actions/constants";
 
-let todoListState = {
-    isLoading: false,
-    todos: [],
-    error: null
-};
-
-// todo get todos from some remote storage
-export function TodoListReducer(state = todoListState, action) {
+export function TodoListReducer(state = [], action) {
     switch (action.type) {
-        case TODO_LIST.GET:
-            return {
-                ...state,
-                isLoading: true
-            };
+// todo get todos from some remote storage
         case TODO_LIST.ADD:
-            return {
-                ...state,
-                todos: [
-                    ...state.todos,
+            return [
+                    ...state,
                     {
                         id: action.id,
                         description: action.description,
                         priority: action.priority,
-                        completed: false
+                        complete: false,
+                        expanded: false
                     }
-                ],
-                isLoading: false
-            };
+                ];
+        case TODO_LIST.COMPLETE:
+            return state.map((todo, index) => {
+                    if (index === action.id) {
+                        return Object.assign({}, todo, {
+                            complete: !todo.complete
+                        });
+                    }
+                    return todo
+                });
+        case TODO_LIST.EXPAND:
+            return state.map((todo, index) => {
+                if (index === action.id) {
+                    return Object.assign({}, todo, {
+                        expanded: !todo.expanded
+                    });
+                }
+                return todo
+            });
         case TODO_LIST.DELETE:
             return {
                 ...state,

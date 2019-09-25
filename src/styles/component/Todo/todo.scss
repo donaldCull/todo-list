@@ -51,7 +51,22 @@
       }
 
       .item-body {
-        .item-description {}
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        .item-description {
+          word-break: normal;
+        }
+
+        &.expanded {
+          white-space: normal;
+          overflow: visible;
+
+          .item-description {
+            word-break: break-word;
+          }
+        }
       }
 
       &:hover {
