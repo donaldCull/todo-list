@@ -3,12 +3,23 @@
 html, body {
   margin: 0;
   padding: 0;
+  line-height: 1.5;
 }
 
 body {
   color: #ffffff;
   font-family: $font_default;
-  background-color: rgb(25, 118, 210);
+  background-color: $background_primary;
+}
+
+button {
+  background-color: whitesmoke;
+  border: 3px solid $background_primary;
+  border-radius: 3px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: $box_shadow;
+  }
 }
 
 input, select, button {
@@ -19,4 +30,9 @@ input, select, button {
 
 h1 {
   text-align: center;
+}
+
+.error {
+  text-align: center;
+  color: red;
 }

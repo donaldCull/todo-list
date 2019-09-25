@@ -8,7 +8,8 @@ class AddTodo extends Component {
         this.state = {
             clicked: false,
             description: "",
-            priority: "low"
+            priority: "low",
+            error: ""
         };
         this.addTodo = this.addTodo.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -16,8 +17,13 @@ class AddTodo extends Component {
     }
 
     addTodo(e) {
+        const { description } = this.state;
         e.preventDefault();
-        this.props.addTodo(this.state.description, this.state.priority);
+        if (!description.trim()) {
+            this.setState({error: "Todo item has no description!"});
+            return
+        }
+        this.props.addTodo(description, this.state.priority);
         this.setState({clicked: false, description: "", priority: "low"})
     }
 
@@ -54,6 +60,7 @@ class AddTodo extends Component {
                         <option value="high">High</option>
                     </select>
                     <button onClick={this.addTodo}>Add</button>
+                    { this.state.error && <span className="error">{this.state.error}</span>}
                 </form>
                 }
             </div>
