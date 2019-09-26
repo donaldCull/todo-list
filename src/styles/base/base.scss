@@ -14,7 +14,8 @@ body {
 }
 
 button {
-  @include buttonStyle($background_primary)
+  @include buttonStyle($background_primary);
+  &:hover {transform: scale(1.05);}
 }
 
 input, select {
