@@ -3,9 +3,20 @@ $font_default: "Source Sans Pro","Segoe UI", sans-serif;
 
 /// Colours
 $background_primary: rgb(25, 118, 210);
+$error_color: #ff0808;
 $border_colour: rgb(51, 51, 51);
 $todo_background_colour: rgb(245, 245, 245);
 
 /// Shadow
 $box_shadow: 10px 10px 10px -7px rgba(0,0,0,0.33);
 $hover_box_shadow: 15px 15px 15px -7px rgba(0,0,0,0.66);
+
+/// Padding
+$small_padding: 0.6em;
+$large_padding: 1.2em;
+$huge_padding: 2.4em;
+
+/// Margin
+$small_margin: 0.6em;
+$large_margin: 1.2em;
+$huge_margin: 2.4em;

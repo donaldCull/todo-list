@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import TodoItem from "./TodoItem";
 import AddTodo from "./AddTodo";
 
-const TodoList = ({ todos, onTodoComplete, onTodoExpand }) => (
-        <div className="todo-list">
-            <AddTodo />
-            {todos.map((todo, index) => (
-                <TodoItem key={index} {...todo} onTodoComplete={() => onTodoComplete(index)} onTodoExpand={() => onTodoExpand(index)}/>
-            ))}
-        </div>
-    );
+const TodoList = ({todos, onTodoComplete, onTodoExpand, onTodoDelete}) => (
+    <div className="todo-list">
+        <AddTodo/>
+        {todos.map((todo, index) => (
+            <TodoItem key={index} {...todo} onTodoComplete={() => onTodoComplete(index)}
+                      onTodoExpand={() => onTodoExpand(index)} onTodoDelete={() => onTodoDelete(index)}/>
+        ))}
+    </div>
+);
 
 TodoList.propTypes = {
     todos: PropTypes.arrayOf(
@@ -22,6 +23,7 @@ TodoList.propTypes = {
         }).isRequired
     ).isRequired,
     onTodoComplete: PropTypes.func.isRequired,
+    onTodoDelete: PropTypes.func.isRequired,
     onTodoExpand: PropTypes.func.isRequired
 };
 

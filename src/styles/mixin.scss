@@ -1,0 +1,13 @@
+@import "abstracts/variable";
+
+@mixin buttonStyle($color) {
+  padding: 0.6em;
+  margin: 1em 0;
+  background-color: whitesmoke;
+  border: 3px solid $color;
+  border-radius: 3px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: $box_shadow;
+  }
+}

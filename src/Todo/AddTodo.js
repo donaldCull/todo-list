@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {addTodo} from "../actions";
+import {TODO_PRIORITY} from "./TodoConstants";
 
 class AddTodo extends Component {
     constructor(props) {
         super(props);
         this.state = {
             clicked: false,
+            title: "",
             description: "",
-            priority: "low",
+            priority: TODO_PRIORITY.LOW,
             error: ""
         };
         this.addTodo = this.addTodo.bind(this);
@@ -17,14 +19,17 @@ class AddTodo extends Component {
     }
 
     addTodo(e) {
-        const { description } = this.state;
+        const {title, description} = this.state;
         e.preventDefault();
-        if (!description.trim()) {
+        if (!title.trim()) {
+            this.setState({error: "Todo item has no title!"});
+            return
+        } else if (!description.trim()) {
             this.setState({error: "Todo item has no description!"});
             return
         }
-        this.props.addTodo(description, this.state.priority);
-        this.setState({clicked: false, description: "", priority: "low"})
+        this.props.addTodo(title, description, this.state.priority);
+        this.setState({clicked: false, title: "", description: "", priority: TODO_PRIORITY.LOW, error: ""})
     }
 
     toggleAddTodo() {
@@ -37,30 +42,35 @@ class AddTodo extends Component {
     }
 
     render() {
+        const {clicked} = this.state;
         return (
             <div className="todo-item add-item">
-                <div className={this.state.clicked ? "item-header add-expanded" : "item-header add-unexpanded"}>
+                {!clicked &&
+                <div className={clicked ? "item-header add-expanded" : "item-header add-unexpanded"}>
                     <button onClick={this.toggleAddTodo}>
                         <span role="img" aria-label="add">➕ Add todo</span>
                     </button>
-                    {this.state.clicked &&
+                </div>
+                }
+                {clicked &&
+                <form>
                     <button onClick={this.toggleAddTodo}>
                         <span role="img" aria-label="cancel">❌ Cancel</span>
                     </button>
-                    }
-                </div>
-                {this.state.clicked &&
-                <form>
+                    <label htmlFor="title">Title:</label>
+                    <input name="title" id="title" type="text" onChange={this.onChange}/>
                     <label htmlFor="description">Description:</label>
                     <input name="description" id="description" type="text" onChange={this.onChange}/>
                     <label htmlFor="priority">Priority:</label>
                     <select name="priority" onChange={this.onChange} id="priority">
-                        <option value="low">Low</option>
-                        <option value="medium">Medium</option>
-                        <option value="high">High</option>
+                        <option value={TODO_PRIORITY.LOW}>Low</option>
+                        <option value={TODO_PRIORITY.MEDIUM}>Medium</option>
+                        <option value={TODO_PRIORITY.HIGH}>High</option>
                     </select>
-                    <button onClick={this.addTodo}>Add</button>
-                    { this.state.error && <span className="error">{this.state.error}</span>}
+                    <button onClick={this.addTodo}>
+                        <span role="img" aria-label="cancel">➕ Add</span>
+                    </button>
+                    {this.state.error && <span className="error">{this.state.error}</span>}
                 </form>
                 }
             </div>
@@ -69,7 +79,7 @@ class AddTodo extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addTodo: (description, priority) => dispatch(addTodo(description, priority))
+    addTodo: (title, description, priority) => dispatch(addTodo(title, description, priority))
 });
 
 export default connect(null, mapDispatchToProps)(AddTodo);

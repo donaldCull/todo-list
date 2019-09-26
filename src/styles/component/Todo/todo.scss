@@ -1,19 +1,22 @@
 @import "../../abstracts/variable";
+@import "../../mixin";
 
 .todo-app {
   display: flex;
   flex-direction: column;
+
   h1 {
     font-size: 3em;
   }
+
   .todo-list {
     color: #000000;
     width: 400px;
 
     .todo-item {
       display: flex;
-      margin-bottom: 2em;
-      padding: 0.6em;
+      margin-bottom: $large_margin;
+      padding: $small_padding;
       flex-direction: column;
       background-color: $todo_background_colour;
       border-radius: 5px;
@@ -22,19 +25,20 @@
       &.add-item {
         .item-header {
           border-bottom: none;
-          margin-bottom: 0;
         }
+
         form {
           display: flex;
           flex-direction: column;
+          padding: $small_padding;
         }
       }
+
       .item-header {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
-        margin-bottom: 0.6em;
-        padding: 5px;
+        margin-bottom: $small_margin;
+        padding: $small_padding;
         border-bottom: 1px solid $border_colour;
 
         &.add-expanded {
@@ -45,30 +49,76 @@
           flex-direction: column;
         }
 
-        .item-id {
-          align-items: flex-start;
+        .item-title {
+          flex: 1;
+          word-break: break-word;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
         }
-        .item-priority {}
+
+        .item-priority {
+        }
+
         .item-complete {
-          align-items: flex-end;
         }
       }
 
       .item-body {
+        padding: $small_padding;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
 
-        .item-description {
+        .item-description, .item-title, .item-priority {
           word-break: break-word;
+        }
+
+        .body-unexpanded {
+          display: flex;
+
+          .item-description {
+            flex: 1;
+          }
+
+          .expand-indicator {
+            &:hover {
+              transform: rotate(180deg);
+            }
+          }
         }
 
         &.expanded {
           white-space: normal;
           overflow: visible;
 
-          .item-description {
+          .body-expanded {
+            display: flex;
+            flex-direction: column;
+
+            .button-group {
+              display: flex;
+              justify-content: space-between;
+
+              .expand-indicator {
+                padding: 0.6em;
+                margin: 1em 0;
+              }
+
+
+              &:hover {
+                .expand-indicator {
+                  transform: rotate(180deg);
+                }
+              }
+
+              .delete-todo {
+                @include buttonStyle($error_color)
+              }
+            }
+
           }
+
         }
       }
 

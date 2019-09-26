@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import TodoList from "./TodoList";
-import {completeTodo, expandTodo} from "../actions";
+import {completeTodo, deleteTodo, expandTodo} from "../actions";
 
 const mapStateToProps = state => {
     return {
@@ -15,6 +15,9 @@ const mapDispatchToProps = dispatch => {
         },
         onTodoExpand: id => {
             dispatch(expandTodo(id))
+        },
+        onTodoDelete: id => {
+            dispatch(deleteTodo(id))
         }
     }
 };
